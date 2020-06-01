@@ -8,19 +8,19 @@ class Counter extends React.Component {
 	if (this.props.isStart & !this.props.isBreak) {
 	  return (
 		<View style={styles.row}>
-			<Text style={styles.timer}>Work:    {this.props.min} Min: {this.props.sec} Sec</Text>
+			<Text style={styles.timer}>Work:  {this.props.min} Min: {this.props.sec} Sec</Text>
 		</View>
 	  );
 	} if (this.props.isStart & this.props.isBreak) {
 	  return (
 		<View style={styles.row}>
-			<Text style={styles.timer}>Break:	{this.props.min} Min: {this.props.sec} Sec</Text>
+			<Text style={styles.timer}>Break:  {this.props.min} Min: {this.props.sec} Sec</Text>
 		</View>
 	  );
 	} else {
 	  return (
 	  <View style={styles.row}>
-		<Text style={styles.timer}>Input the timings below and press start to begin timing.</Text>
+		<Text style={{alignSelf: 'center', fontSize:18}}>Input the timings below and press start to begin timing.</Text>
 	  </View>
 	  );
 	}
@@ -263,13 +263,14 @@ const styles = StyleSheet.create({
     flex: 1, 
 	height: 42, 
 	fontSize:16, 
-	paddingLeft: 15
+	paddingLeft: 5
   },
   buttonContainer: {
 	margin: 20
   },
   timer : {
 	padding: 10,
-	fontSize: 20
+	fontSize: 28,
+	fontWeight: "bold"
   }	  
 });
