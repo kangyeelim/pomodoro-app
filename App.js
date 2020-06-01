@@ -36,7 +36,9 @@ const initialState = {
 	  min: '00',
 	  sec: '00',
 	  timer: 0,
-	  isBreak: false
+	  isBreak: false,
+	  workTimeSec: '00',
+	  breakTimeSec: '00',
 	};
 		
 
@@ -69,12 +71,12 @@ export default class App extends React.Component {
 		this.setSec(seconds);
 		if (this.state.timer == 0 & this.state.isBreak) {
 			console.log("finished")
-			this.setState({timer: parseInt(this.state.workTime) * 60});
+			this.setState({timer: parseInt(this.state.workTime) * 60 + parseInt(this.state.workTimeSec)});
 			this.setIsBreak(false);
 			this.vibrate();
 		} else if (this.state.timer == 0 & !this.state.isBreak) {
 			console.log("break time")
-			this.setState({timer: parseInt(this.state.breakTime) * 60});
+			this.setState({timer: parseInt(this.state.breakTime) * 60 + parseInt(this.state.breakTimeSec)});
 			this.setIsBreak(true);
 			this.vibrate();
 		}
@@ -83,7 +85,7 @@ export default class App extends React.Component {
   
   setWorkTime(input) {
 	this.setState({workTime: input})
-	this.setState({timer: parseInt(input) * 60})
+	this.setState({timer: parseInt(input) * 60 + parseInt(this.state.workTimeSec)})
   }
   
   setBreakTime(input) {
@@ -119,10 +121,21 @@ export default class App extends React.Component {
 	this.setState(initialState);
 	this.workTimeInput.clear();
 	this.breakTimeInput.clear();
+	this.workTimeInputSec.clear();
+	this.breakTimeInputSec.clear();
   }
   
   vibrate() {
 	Vibration.vibrate([500, 500, 500]);
+  }
+  
+  setWorkTimeSec(input) {
+	this.setState({workTimeSec:input});
+	this.setState({timer: parseInt(input) + parseInt(this.state.workTime) * 60})
+  }
+  
+  setBreakTimeSec(input) {
+	this.setState({breakTimeSec:input});
   }
   
   render() {
@@ -137,10 +150,15 @@ export default class App extends React.Component {
 				/>
 			</View>
 		</View>
+		<View>
+			<Text style={{padding: 10, fontSize: 16, fontWeight: "bold"}}>
+				Work Time:
+			</Text>
+		</View>
 		<View style={styles.row}>
 			<View>
 				<Text style={{padding: 10, fontSize: 16}}>
-					Work Time (Minutes):
+					Mins:
 				</Text>
 			</View>
 			<View>
@@ -152,11 +170,30 @@ export default class App extends React.Component {
 					ref={input => { this.workTimeInput = input }}
 				/>
 			</View>
+			<View>
+				<Text style={{padding: 10, fontSize: 16}}>
+				  Secs:
+				</Text>
+			</View>
+			<View>
+				<TextInput
+					style={styles.input}
+					placeholder="Work Time"
+					onChangeText={workTimeSec => this.setWorkTimeSec(workTimeSec)}
+					defaultValue={this.state.workTimeSec}
+					ref={input => { this.workTimeInputSec = input }}
+				/>
+			</View>
 		</View>
+		<View>
+				<Text style={{padding: 10, fontSize: 16, fontWeight: "bold"}}>
+					Break Time:
+				</Text>
+			</View>
 		<View style={styles.row}>
 			<View>
 				<Text style={{padding: 10, fontSize: 16}}>
-					Break Time (Minutes):
+				  Mins:
 				</Text>
 			</View>
 			<View>
@@ -166,6 +203,20 @@ export default class App extends React.Component {
 					onChangeText={breakTime => this.setBreakTime(breakTime)}
 					defaultValue={this.state.breakTime}
 					ref={input => { this.breakTimeInput = input }}
+				/>
+			</View>
+			<View>
+				<Text style={{padding: 10, fontSize: 16}}>
+					Secs:
+				</Text>
+			</View>
+			<View>
+				<TextInput
+					style={styles.input}
+					placeholder="Break Time"
+					onChangeText={breakTimeSec => this.setBreakTimeSec(breakTimeSec)}
+					defaultValue={this.state.breakTimeSec}
+					ref={input => { this.breakTimeInputSec = input }}
 				/>
 			</View>
 		</View>
