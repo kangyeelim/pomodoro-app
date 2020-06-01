@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Vibration, TextInput } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, Button, Vibration, TextInput } from 'react-native';
 import PropTypes from 'prop-types'
 
 class Counter extends React.Component {
@@ -40,7 +40,6 @@ const initialState = {
 	  workTimeSec: '00',
 	  breakTimeSec: '00',
 	};
-		
 
 export default class App extends React.Component {
 	
@@ -141,6 +140,7 @@ export default class App extends React.Component {
   render() {
   return (
       <View style={styles.container}> 
+	  <ImageBackground source={{uri: 'https://source.unsplash.com/jCL98LGaeoE'}} style={styles.image}>
 	    <View style={styles.row}>
 			<View>
 				<Counter sec={this.state.sec}
@@ -150,7 +150,7 @@ export default class App extends React.Component {
 				/>
 			</View>
 		</View>
-		<View>
+		<View style={styles.row}>
 			<Text style={{padding: 10, fontSize: 16, fontWeight: "bold"}}>
 				Work Time:
 			</Text>
@@ -185,7 +185,7 @@ export default class App extends React.Component {
 				/>
 			</View>
 		</View>
-		<View>
+		<View style={styles.row}>
 				<Text style={{padding: 10, fontSize: 16, fontWeight: "bold"}}>
 					Break Time:
 				</Text>
@@ -231,6 +231,7 @@ export default class App extends React.Component {
 				<Button title="Reset" onPress={ () => this.resetState()}/>
 			</View>
 		</View>
+	  </ImageBackground>
 	</View>
   );
   }
@@ -242,6 +243,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
   },
   row: {
 	   justifyContent: 'center',
