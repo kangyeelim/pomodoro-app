@@ -12,7 +12,8 @@ A simple Pomodoro Timer mobile application made with React Native.
 
 * Vibrates to inform you of the switch.
 
-### Setup
+
+## Setup
 
 Make sure you have expo set up.
 If not, head to [this link](https://docs.expo.io/versions/latest/introduction/installation.html)
