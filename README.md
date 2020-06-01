@@ -2,6 +2,8 @@
 
 A simple Pomodoro Timer mobile application made with React Native. 
 
+![](/img/screenshot.jpg)
+
 ## How to use it
 
 * Simply input your desired work time (recommended to be 25 minutes) and break time (recommended to be 5 minutes).
@@ -10,3 +12,28 @@ A simple Pomodoro Timer mobile application made with React Native.
 
 * Vibrates to inform you of the switch.
 
+### Setup
+
+Make sure you have expo set up.
+If not, head to [this link](https://docs.expo.io/versions/latest/introduction/installation.html)
+to install Expo. Download either the client app on your mobile phone (suggested) or set up the emulator/simulator or use a web browser to view
+the app.
+
+Make sure you have NPM and node.js installed.
+If not, [install them](https://nodejs.org/en/).
+
+
+```bash
+# Clone repo
+$ git clone this repository
+
+$ cd pomodoro-app
+
+# Install all dependencies
+$ npm install
+
+# Run
+$ npm start
+
+# The Expo GUI should be launched in your web browser
+```
