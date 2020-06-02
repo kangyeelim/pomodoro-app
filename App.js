@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, StyleSheet, Text, View, Button, Vibration, TextInput } from 'react-native';
+import { KeyboardAvoidingView, ImageBackground, StyleSheet, Text, View, Button, Vibration, TextInput } from 'react-native';
 import PropTypes from 'prop-types'
 
 class Counter extends React.Component {
@@ -177,7 +177,8 @@ export default class App extends React.Component {
   return (
       <View style={styles.container}> 
 	  <ImageBackground source={{uri: 'https://source.unsplash.com/jCL98LGaeoE'}} style={styles.image}>
-	    <View style={styles.row}>
+	  <KeyboardAvoidingView behavior="padding">
+		<View style={styles.row}>
 			<View>
 				<Counter sec={this.state.sec}
 				min={this.state.min}
@@ -271,6 +272,7 @@ export default class App extends React.Component {
 				<Button title="Reset" onPress={ () => this.resetState()} disabled={!this.state.isResetValid}/>
 			</View>
 		</View>
+	  </KeyboardAvoidingView>
 	  </ImageBackground>
 	</View>
   );
