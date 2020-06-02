@@ -39,6 +39,9 @@ const initialState = {
 	  isBreak: false,
 	  workTimeSec: '00',
 	  breakTimeSec: '00',
+	  isStartValid: false,
+	  isResetValid: false,
+	  isPauseValid: false,
 	};
 
 export default class App extends React.Component {
@@ -82,13 +85,42 @@ export default class App extends React.Component {
 	} 
   }
   
+  componentDidUpdate(prevProps, prevState) {
+	  if (this.state.workTime !== prevState.workTime|| 
+	  this.state.workTimeSec !== prevState.workTimeSec ||
+	  this.state.breakTime !== prevState.breakTime ||
+	  this.state.breakTimeSec !== prevState.breakTimeSec ||
+	  this.state.isStart !== prevState.isStart) {
+		this.validateInput();
+	  }
+  }
+  
+  validateInput() {
+	  if ((+this.state.workTime > 0 || +this.state.workTimeSec > 0) && 
+	  (+this.state.breakTime > 0 || +this.state.breakTimeSec > 0)) {
+		  this.setState({isStartValid:true})
+	  } else {
+		  this.setState({isStartValid:false})
+	  }
+	  if (this.state.isStart == true) {
+		this.setState({isStartValid:false});
+		this.setState({isPauseValid:true});
+		this.setState({isResetValid:true});
+	  }
+  }
+  
+  
   setWorkTime(input) {
-	this.setState({workTime: input})
-	this.setState({timer: parseInt(input) * 60 + parseInt(this.state.workTimeSec)})
+	if (+input >= 0) {
+		this.setState({workTime: input});
+		this.setState({timer: parseInt(input) * 60 + parseInt(this.state.workTimeSec)});
+	} 
   }
   
   setBreakTime(input) {
-	this.setState({breakTime: input})
+	if (+input >= 0) {
+		this.setState({breakTime: input});
+	} 
   }
   
   setIsPause() {
@@ -129,12 +161,16 @@ export default class App extends React.Component {
   }
   
   setWorkTimeSec(input) {
-	this.setState({workTimeSec:input});
-	this.setState({timer: parseInt(input) + parseInt(this.state.workTime) * 60})
+	if (+input >= 0) {
+		this.setState({workTimeSec:input});
+		this.setState({timer: parseInt(input) + parseInt(this.state.workTime) * 60})
+	} 
   }
   
   setBreakTimeSec(input) {
-	this.setState({breakTimeSec:input});
+	if (+input >= 0) {
+		this.setState({breakTimeSec:input});	
+	} 
   }
   
   render() {
@@ -226,13 +262,13 @@ export default class App extends React.Component {
 		</View>
 		<View style={styles.row}>
 			<View style={styles.buttonContainer}>
-				<Button title="Start" onPress={isStart => this.setIsStart(true)}/>
+				<Button title="Start" onPress={isStart => this.setIsStart(true)} disabled={!this.state.isStartValid}/>
 			</View>
 			<View>
-				<Button title="Pause/Continue" onPress={isPause => this.setIsPause()}/>
+				<Button title="Pause/Continue" onPress={isPause => this.setIsPause()} disabled={!this.state.isPauseValid}/>
 			</View>
 			<View style={styles.buttonContainer}>
-				<Button title="Reset" onPress={ () => this.resetState()}/>
+				<Button title="Reset" onPress={ () => this.resetState()} disabled={!this.state.isResetValid}/>
 			</View>
 		</View>
 	  </ImageBackground>
