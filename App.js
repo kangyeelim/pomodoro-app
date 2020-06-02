@@ -164,6 +164,7 @@ export default class App extends React.Component {
 			<View>
 				<TextInput
 					style={styles.input}
+					keyboardType="numeric"
 					placeholder="Work Time"
 					onChangeText={workTime => this.setWorkTime(workTime)}
 					defaultValue={this.state.workTime}
@@ -178,6 +179,7 @@ export default class App extends React.Component {
 			<View>
 				<TextInput
 					style={styles.input}
+					keyboardType="numeric"
 					placeholder="Work Time"
 					onChangeText={workTimeSec => this.setWorkTimeSec(workTimeSec)}
 					defaultValue={this.state.workTimeSec}
@@ -199,6 +201,7 @@ export default class App extends React.Component {
 			<View>
 				<TextInput
 					style={styles.input}
+					keyboardType="numeric"
 					placeholder="Break Time"
 					onChangeText={breakTime => this.setBreakTime(breakTime)}
 					defaultValue={this.state.breakTime}
@@ -213,6 +216,7 @@ export default class App extends React.Component {
 			<View>
 				<TextInput
 					style={styles.input}
+					keyboardType="numeric"
 					placeholder="Break Time"
 					onChangeText={breakTimeSec => this.setBreakTimeSec(breakTimeSec)}
 					defaultValue={this.state.breakTimeSec}
