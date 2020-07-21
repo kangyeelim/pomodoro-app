@@ -2,6 +2,8 @@
 
 A simple Pomodoro Timer mobile application made with React Native. 
 
+#### https://courses.edx.org/courses/course-v1:HarvardX+CS50M+Mobile/course/
+
 ![](/img/screenshot.jpg)
 
 ## How to use it
